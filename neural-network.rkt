@@ -148,4 +148,21 @@
           (range (vector-ref topology (sub1 to-layer)))))
        (reverse (range 1 topology-size))))
 
+    ;; Simple feedforward and backpropagate combo
+    (define/public (learn gain input output)
+      (feedforward input)
+      (backpropagate gain output))
+
+    ;; Takes the amount of samples desired, a random input-vector generator,
+    ;; and a function which turns it into the desired output.
+    (define/public (learn-function amount gain generator function)
+      (when (> amount 0)
+        (letrec
+            ((input
+              (generator))
+             (output
+              (function input)))
+          (learn gain input output))
+        (learn-function (sub1 amount) gain generator function)))
+
     (super-new)))
