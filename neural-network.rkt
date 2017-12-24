@@ -1,5 +1,7 @@
 #lang racket
 
+(provide neural-network%)
+
 (require math/matrix)
 
 (define neural-network%
