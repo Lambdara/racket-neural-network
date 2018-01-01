@@ -93,7 +93,7 @@
 
     ;; Get output from network
     (define/public (get-output)
-      (vector-ref current-neuron-values (sub1 topology-size)))
+      (vector-copy (vector-ref current-neuron-values (sub1 topology-size))))
 
     ;; Backpropagate errors
     (define/public (backpropagate gain targets)
